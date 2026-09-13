@@ -1,11 +1,9 @@
-import axios from "axios";
-
-const URL = "https://fakestoreapi.com/users";
+import api from "./api";
 
 const crearCliente = async (cliente) => {
 
-    const respuesta = await axios.post(
-        URL,
+    const respuesta = await api.post(
+        "/users",
         cliente
     );
 
