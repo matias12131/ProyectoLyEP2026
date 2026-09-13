@@ -3,6 +3,15 @@ import { useState } from "react";
 import { Form, Button, Alert, Spinner } from "react-bootstrap";
 import clientesService from "../services/clientesService";
 
+// Mejora correspondiente al issue #3 / hallazgo #4 del análisis técnico
+// (ANALISIS.md): "Nuevos clientes se creaban con contraseña fija '1234'
+// para todos" (Impacto: Alto). Se reemplaza por un campo de contraseña
+// que ingresa quien da de alta al cliente, validado con la misma regla
+// que ya usa Login.jsx (mínimo 8 caracteres, una mayúscula, un número).
+//
+// Se descartó autogenerar la contraseña porque exigiría mostrarla en
+// pantalla para poder comunicarla, reintroduciendo el problema del
+// issue #1 (exposición de contraseñas en texto plano en la UI).
 const FormCliente = () => {
 
     const [nombre, setNombre] = useState("");
