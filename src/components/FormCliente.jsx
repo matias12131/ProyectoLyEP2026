@@ -116,7 +116,7 @@ const FormCliente = () => {
 
             <h3>Nuevo Cliente</h3>
 
-                        <Form onSubmit={manejarSubmit}>
+            <Form onSubmit={manejarSubmit}>
 
                 <Form.Group className="mb-3">
 
