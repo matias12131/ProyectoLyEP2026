@@ -21,6 +21,9 @@ const FormCliente = () => {
         setMensaje("");
         setError("");
 
+        //Agregado por Apaza Ignacio
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
         if (
             nombre.trim() === "" ||
             email.trim() === "" ||
