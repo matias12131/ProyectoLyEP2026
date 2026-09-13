@@ -63,7 +63,7 @@ const FormCliente = () => {
 
             username: nombre.toLowerCase().replace(/\s/g, ""),
 
-            password: "1234",
+            password,
 
             name: {
                 firstname: nombre,
@@ -94,6 +94,7 @@ const FormCliente = () => {
             setEmail("");
             setTelefono("");
             setCiudad("");
+            setPassword("");
 
         } catch {
 
