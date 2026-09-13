@@ -21,7 +21,7 @@ const FormCliente = () => {
         setMensaje("");
         setError("");
 
-        //Agregado por Apaza Ignacio
+        //Agregado por Apaza Ignacio/ #8
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
         if (
@@ -32,6 +32,14 @@ const FormCliente = () => {
         ) {
 
             setError("Complete todos los campos.");
+
+            return;
+        }
+
+        //Agregado por Apaza Ignacio/ #8
+        if (!emailRegex.test(email)) {
+
+            setError("Ingrese un email válido.");
 
             return;
         }
