@@ -24,15 +24,36 @@ const FormCliente = () => {
         setMensaje("");
         setError("");
 
-        if (
-            nombre.trim() === "" ||
-            email.trim() === "" ||
-            telefono.trim() === "" ||
-            ciudad.trim() === ""
-        ) {
+        const nuevosErrores = {};
 
-            setError("Complete todos los campos.");
+        if (nombre.trim() === "") {
+            nuevosErrores.nombre = "El nombre es obligatorio.";
+        }
+        if (email.trim() === "") {
+            nuevosErrores.email = "El email es obligatorio.";
+        }
+        if (telefono.trim() === "") {
+            nuevosErrores.telefono = "El teléfono es obligatorio.";
+        }
+        if (ciudad.trim() === "") {
+            nuevosErrores.ciudad = "La ciudad es obligatoria.";
+        }
 
+        // Misma regla de complejidad que ya valida Login.jsx, para que
+        // ningún cliente nuevo quede con una contraseña débil o repetida.
+        if (!password) {
+            nuevosErrores.password = "La contraseña es obligatoria.";
+        } else if (password.length < 8) {
+            nuevosErrores.password = "Mínimo 8 caracteres.";
+        } else if (!/[A-Z]/.test(password)) {
+            nuevosErrores.password = "Debe tener una mayúscula.";
+        } else if (!/[0-9]/.test(password)) {
+            nuevosErrores.password = "Debe tener un número.";
+        }
+
+        setErroresCampos(nuevosErrores);
+
+        if (Object.keys(nuevosErrores).length > 0) {
             return;
         }
 
