@@ -2,6 +2,7 @@ import "../css/listaclientes.css"
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import FormCliente from "../components/FormCliente";
+import clientesService from "../services/clientesService";
 
 const ListaClientes = () => {
   const [clientes, setClientes] = useState([]);
@@ -10,22 +11,16 @@ const ListaClientes = () => {
   const [error, setError] = useState(false);
 
   useEffect(() => {
-    fetch("https://fakestoreapi.com/users")
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error("Error al obtener clientes");
-        }
-        return res.json();
-      })
-      .then((data) => {
-        setClientes(data);
-        setLoading(false);
-      })
-      .catch(() => {
-        setError(true);
-        setLoading(false);
-      });
-  }, []);
+  clientesService.obtenerClientes()
+    .then((data) => {
+      setClientes(data);
+      setLoading(false);
+    })
+    .catch(() => {
+      setError(true);
+      setLoading(false);
+    });
+}, []);
 
   const clientesFiltrados = clientes.filter(
     (cliente) =>
