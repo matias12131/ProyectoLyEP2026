@@ -16,6 +16,8 @@ const DetalleCliente = () => {
     .then((data) => setCliente(data));
 }, [id]);
 
+const eliminarCliente = async () => {
+    try {
   const respuesta = await clientesService.eliminarCliente(id);
 
       if (respuesta.status === 200) {
