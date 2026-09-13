@@ -24,6 +24,7 @@ const FormCliente = () => {
         setMensaje("");
         setError("");
 
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
         const nuevosErrores = {};
 
         if (nombre.trim() === "") {
@@ -54,6 +55,14 @@ const FormCliente = () => {
         setErroresCampos(nuevosErrores);
 
         if (Object.keys(nuevosErrores).length > 0) {
+            return;
+        }
+
+        //Agregado por Apaza Ignacio/ #8
+        if (!emailRegex.test(email)) {
+
+            setError("Ingrese un email válido.");
+
             return;
         }
 
