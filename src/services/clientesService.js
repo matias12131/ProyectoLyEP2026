@@ -10,6 +10,12 @@ const crearCliente = async (cliente) => {
     return respuesta.data;
 };
 
+const obtenerClientes = async () => {
+  const respuesta = await api.get("/users");
+  return respuesta.data;
+};
+
 export default {
-    crearCliente
+    crearCliente,
+    obtenerClientes
 };
