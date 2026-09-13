@@ -10,6 +10,9 @@ const FormCliente = () => {
     const [telefono, setTelefono] = useState("");
     const [ciudad, setCiudad] = useState("");
 
+    const [password, setPassword] = useState("");
+    const [erroresCampos, setErroresCampos] = useState({});
+
     const [mensaje, setMensaje] = useState("");
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
@@ -21,15 +24,36 @@ const FormCliente = () => {
         setMensaje("");
         setError("");
 
-        if (
-            nombre.trim() === "" ||
-            email.trim() === "" ||
-            telefono.trim() === "" ||
-            ciudad.trim() === ""
-        ) {
+        const nuevosErrores = {};
 
-            setError("Complete todos los campos.");
+        if (nombre.trim() === "") {
+            nuevosErrores.nombre = "El nombre es obligatorio.";
+        }
+        if (email.trim() === "") {
+            nuevosErrores.email = "El email es obligatorio.";
+        }
+        if (telefono.trim() === "") {
+            nuevosErrores.telefono = "El teléfono es obligatorio.";
+        }
+        if (ciudad.trim() === "") {
+            nuevosErrores.ciudad = "La ciudad es obligatoria.";
+        }
 
+        // Misma regla de complejidad que ya valida Login.jsx, para que
+        // ningún cliente nuevo quede con una contraseña débil o repetida.
+        if (!password) {
+            nuevosErrores.password = "La contraseña es obligatoria.";
+        } else if (password.length < 8) {
+            nuevosErrores.password = "Mínimo 8 caracteres.";
+        } else if (!/[A-Z]/.test(password)) {
+            nuevosErrores.password = "Debe tener una mayúscula.";
+        } else if (!/[0-9]/.test(password)) {
+            nuevosErrores.password = "Debe tener un número.";
+        }
+
+        setErroresCampos(nuevosErrores);
+
+        if (Object.keys(nuevosErrores).length > 0) {
             return;
         }
 
@@ -39,7 +63,7 @@ const FormCliente = () => {
 
             username: nombre.toLowerCase().replace(/\s/g, ""),
 
-            password: "1234",
+            password,
 
             name: {
                 firstname: nombre,
@@ -70,6 +94,7 @@ const FormCliente = () => {
             setEmail("");
             setTelefono("");
             setCiudad("");
+            setPassword("");
 
         } catch {
 
@@ -103,7 +128,12 @@ const FormCliente = () => {
                         onChange={(e) =>
                             setNombre(e.target.value)
                         }
+                        isInvalid={!!erroresCampos.nombre}
                     />
+
+                    <Form.Control.Feedback type="invalid">
+                        {erroresCampos.nombre}
+                    </Form.Control.Feedback>
 
                 </Form.Group>
 
@@ -117,7 +147,35 @@ const FormCliente = () => {
                         onChange={(e) =>
                             setEmail(e.target.value)
                         }
+                        isInvalid={!!erroresCampos.email}
                     />
+
+                    <Form.Control.Feedback type="invalid">
+                        {erroresCampos.email}
+                    </Form.Control.Feedback>
+
+                </Form.Group>
+
+                <Form.Group className="mb-3">
+
+                    <Form.Label>Contraseña</Form.Label>
+
+                    <Form.Control
+                        type="password"
+                        value={password}
+                        onChange={(e) =>
+                            setPassword(e.target.value)
+                        }
+                        isInvalid={!!erroresCampos.password}
+                    />
+
+                    <Form.Control.Feedback type="invalid">
+                        {erroresCampos.password}
+                    </Form.Control.Feedback>
+
+                    <Form.Text muted>
+                        Mínimo 8 caracteres, con una mayúscula y un número.
+                    </Form.Text>
 
                 </Form.Group>
 
@@ -131,7 +189,12 @@ const FormCliente = () => {
                         onChange={(e) =>
                             setTelefono(e.target.value)
                         }
+                        isInvalid={!!erroresCampos.telefono}
                     />
+
+                    <Form.Control.Feedback type="invalid">
+                        {erroresCampos.telefono}
+                    </Form.Control.Feedback>
 
                 </Form.Group>
 
@@ -145,7 +208,12 @@ const FormCliente = () => {
                         onChange={(e) =>
                             setCiudad(e.target.value)
                         }
+                        isInvalid={!!erroresCampos.ciudad}
                     />
+
+                    <Form.Control.Feedback type="invalid">
+                        {erroresCampos.ciudad}
+                    </Form.Control.Feedback>
 
                 </Form.Group>
 
