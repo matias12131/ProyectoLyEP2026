@@ -1,6 +1,7 @@
 import '../css/detallecliente.css'
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import clientesService from "../services/clientesService";
  
 const DetalleCliente = () => {
  const { id } = useParams();
@@ -11,27 +12,21 @@ const DetalleCliente = () => {
   const [mensaje, setMensaje] = useState("");
 
   useEffect(() => {
-    fetch(`https://fakestoreapi.com/users/${id}`)
-      .then((res) => res.json())
-      .then((data) => setCliente(data));
-  }, [id]);
+  clientesService.obtenerCliente(id)
+    .then((data) => setCliente(data));
+}, [id]);
 
-  const eliminarCliente = async () => {
+const eliminarCliente = async () => {
     try {
-      const respuesta = await fetch(
-        `https://fakestoreapi.com/users/${id}`,
-        {
-          method: "DELETE",
-        }
-      );
+  const respuesta = await clientesService.eliminarCliente(id);
 
-      if (respuesta.ok) {
+      if (respuesta.status === 200) {
         setMensaje("Cliente eliminado correctamente");
 
         setTimeout(() => {
           navigate("/clientes");
-        }, 2000);
-      }
+          }, 2000);
+}
     } catch (error) {
       setMensaje("Error al eliminar cliente");
     }
