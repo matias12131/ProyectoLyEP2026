@@ -57,6 +57,10 @@ const DetalleCliente = () => {
       </p>
 
       <p>
+        <strong>Nombre de Usuario:</strong> {cliente.username}
+      </p>
+
+      <p>
         <strong>Email:</strong> {cliente.email}
       </p>
 
@@ -80,12 +84,6 @@ const DetalleCliente = () => {
 
       <p>
         <strong>Ciudad:</strong> {cliente.address.city}
-      </p>
-
-      <h2>Credenciales</h2>
-
-      <p>
-        <strong>Usuario:</strong> {cliente.username}
       </p>
 
       {role?.trim() === "Gerencia" && (
