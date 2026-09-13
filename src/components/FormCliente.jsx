@@ -116,7 +116,7 @@ const FormCliente = () => {
 
             <h3>Nuevo Cliente</h3>
 
-            <Form onSubmit={manejarSubmit}>
+                        <Form onSubmit={manejarSubmit}>
 
                 <Form.Group className="mb-3">
 
@@ -128,7 +128,12 @@ const FormCliente = () => {
                         onChange={(e) =>
                             setNombre(e.target.value)
                         }
+                        isInvalid={!!erroresCampos.nombre}
                     />
+
+                    <Form.Control.Feedback type="invalid">
+                        {erroresCampos.nombre}
+                    </Form.Control.Feedback>
 
                 </Form.Group>
 
@@ -142,7 +147,35 @@ const FormCliente = () => {
                         onChange={(e) =>
                             setEmail(e.target.value)
                         }
+                        isInvalid={!!erroresCampos.email}
                     />
+
+                    <Form.Control.Feedback type="invalid">
+                        {erroresCampos.email}
+                    </Form.Control.Feedback>
+
+                </Form.Group>
+
+                <Form.Group className="mb-3">
+
+                    <Form.Label>Contraseña</Form.Label>
+
+                    <Form.Control
+                        type="password"
+                        value={password}
+                        onChange={(e) =>
+                            setPassword(e.target.value)
+                        }
+                        isInvalid={!!erroresCampos.password}
+                    />
+
+                    <Form.Control.Feedback type="invalid">
+                        {erroresCampos.password}
+                    </Form.Control.Feedback>
+
+                    <Form.Text muted>
+                        Mínimo 8 caracteres, con una mayúscula y un número.
+                    </Form.Text>
 
                 </Form.Group>
 
@@ -156,7 +189,12 @@ const FormCliente = () => {
                         onChange={(e) =>
                             setTelefono(e.target.value)
                         }
+                        isInvalid={!!erroresCampos.telefono}
                     />
+
+                    <Form.Control.Feedback type="invalid">
+                        {erroresCampos.telefono}
+                    </Form.Control.Feedback>
 
                 </Form.Group>
 
@@ -170,7 +208,12 @@ const FormCliente = () => {
                         onChange={(e) =>
                             setCiudad(e.target.value)
                         }
+                        isInvalid={!!erroresCampos.ciudad}
                     />
+
+                    <Form.Control.Feedback type="invalid">
+                        {erroresCampos.ciudad}
+                    </Form.Control.Feedback>
 
                 </Form.Group>
 
